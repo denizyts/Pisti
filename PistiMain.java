@@ -6,6 +6,19 @@ public class PistiMain {
 public static void main(String[] args){
 
 String[][] deck = new String[4][13];
+int x = 0;
+int[][] arr = new int[4][13];
+
+for(int j=0; j<4; j++){
+for(int i=0; i<13; i++){ 
+        arr[j][i] = x;
+        x++;
+    }
+    }
+
+    PistiShuffle shuf = new PistiShuffle(arr);
+    arr = shuf.Shufunc();
+
 
 String spade = Character.toString((char)6);
 String club = Character.toString((char)5);
@@ -59,14 +72,24 @@ deck[3][12] = heart + "K";
 
 //---------------------------------------------------------------------------------------------
 
+//-------------------------checking for shuf int array------------------------------------
+for(int j=0; j<4; j++){
+    for(int i=0; i<13; i++){ 
+      System.out.println(arr[j][i]); 
+        }
+        }
+
+
+
+
 
 
 
 //---------------------checking for a print--------------------------------------
-for(int j = 0; j<4 ; j++){
+for(int j=0; j<4; j++){
 System.out.println(" ");
 for(int i=0; i<13; i++){ 
-    System.out.print(deck [j][i] + " ");
+    System.out.print(deck[j][i] + " ");
 }
 }
 
