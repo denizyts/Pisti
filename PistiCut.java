@@ -3,21 +3,20 @@ import java.util.Scanner;
 
 public class PistiCut { 
 
-private int a;
-private int[][] deck;
+private String[] deck;
 Random rd = new Random();
 
-PistiCut(int[][] c){
 
-a = rd.nextInt(52);    // random 0 to 51
-deck = new int[4][13]
+PistiCut(String[] c){
+
+deck = new String[52];
+deck = c;
 
 }
 
 
-
-
-
+public void setArr(String[] k){deck = k;}
+public String[] getArr() { return deck;}
 
 
 
