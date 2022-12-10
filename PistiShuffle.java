@@ -2,36 +2,34 @@ import java.util.Random;
 
 public class PistiShuffle { 
 
-    private int[][] deck;              //it is private !!!!!!!!
+    private String[] deck;              //it is private !!!!!!!!
     Random rd = new Random();
 
-PistiShuffle(int[][] c){
+PistiShuffle(String[] c){
 
-deck = new int[4][13];
+deck = new String[52];
 deck = c;
 
 }
 
-public void setArr(int[][] k){deck = k;}
-public int[][] getArr() {return deck;}
+public void setArr(String[] k){deck = k;}
+public String[] getArr() {return deck;}
 
 
-public int[][] Shufunc() { 
+public String[] Shufunc() { 
   
+    String bowl = "";
     int yet = 0;
     while(yet < 1000) {
 
-        int bowl = 0;
+    
 
-        int y = rd.nextInt(4);  
-        int x = rd.nextInt(13);
-        int yy = rd.nextInt(4);  
-        int xx = rd.nextInt(13);
-
-      bowl = deck[y][x];
-      deck[y][x] = deck[yy][xx];
-      deck[yy][xx] = bowl;
-
+        int y = rd.nextInt(52);  
+        int x = rd.nextInt(52);
+       
+      bowl = deck[y];
+      deck[y] = deck[x];
+      deck[x] = bowl;
 
 yet++;
     }

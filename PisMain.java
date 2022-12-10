@@ -1,35 +1,89 @@
 import java.util.Scanner;
 import java.util.Random;
 
-public class PistiMain { 
 
-public static void main(String[] args){
+public class PisMain {
+    public static void main(String[] args) { 
 
-String[][] deck0 = new String[4][13];
-int x = 0;
-int[][] arr = new int[4][13];
+String[][] demodeck = new String[4][13];
+String[] realdeck = new String[52];
+
+for(int i=0; i<4 ; i++){
+for(int j=0; j<13 ; j++){
+demodeck[i][j] = "";
+}
+}
+
+    demodeck = cardassign(demodeck);  //i used this func because its easy way to assign strings.. 
+
+
+int t = 0;
+for(int i=0; i<4 ; i++){
+for(int j=0; j<13 ; j++){
+        
+   realdeck[t] = demodeck[i][j];     //a one dimensional array easy for shuffle. 
+t++;
+}
+}
+
+
+PistiShuffle shuf = new PistiShuffle(realdeck);
+
+
+realdeck = shuf.Shufunc();    //realdeck shuffled !
+
+
+
+
+//-------------testing---------------------------
+
+for(int i=0; i<52; i++){
+
+   System.out.println(realdeck[i]);
+}
 
 
 
 
 
-for(int j=0; j<4; j++){
-for(int i=0; i<13; i++){ 
-        arr[j][i] = x;
-        x++;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-    }
-
-    PistiShuffle shuf = new PistiShuffle(arr);
-    arr = shuf.Shufunc();
 
 
+public static String[][] cardassign(String[][] deck){
 
 
-String spade = Character.toString((char)6);
-String club = Character.toString((char)5);
-String diamond = Character.toString((char)4);
-String heart = Character.toString((char)3);
+ String spade = Character.toString((char)6);
+ String club = Character.toString((char)5);
+ String diamond = Character.toString((char)4);
+ String heart = Character.toString((char)3);
 
 
 //-------------------------------Setting Strings-----------------------------------------
@@ -77,28 +131,10 @@ deck[3][10] = heart + "J";
 deck[3][11] = heart + "Q";
 deck[3][12] = heart + "K";
 
-//---------------------------------------------------------------------------------------------
-}
-//-------------------------checking for shuf int array------------------------------------
-for(int k=0; k<4; k++){
-    for(int i=0; i<13; i++){ 
-      System.out.println(arr[k][i]); 
-        }
-        }
-
-
-
-
-
-
-
-//---------------------checking for a print--------------------------------------
-for(int k=0; k<4; k++){
-System.out.println(" ");
-for(int i=0; i<13; i++){ 
-    System.out.print(deck0[k][i] + " ");
-}
-}
+return deck;
 
 }
 
+
+
+}
