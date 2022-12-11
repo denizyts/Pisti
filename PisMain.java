@@ -28,7 +28,7 @@ t++;
 
 
 PistiShuffle shuf = new PistiShuffle(realdeck);
-
+PistiCut cutter = new PistiCut(realdeck);
 
 realdeck = shuf.Shufunc();    //realdeck shuffled !
 
@@ -41,7 +41,20 @@ for(int i=0; i<52; i++){
 
    System.out.println(realdeck[i]);
 }
+//----------------------------------------------- 
 
+System.out.println("--------------------------------------------cutted------------------------------------");
+
+realdeck = cutter.ComputerCuts();
+
+
+//-------------testing---------------------------
+
+for(int i=0; i<52; i++){
+
+   System.out.println(realdeck[i]);
+}
+//----------------------------------------------- 
 
 
 
