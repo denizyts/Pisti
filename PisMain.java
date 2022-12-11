@@ -30,12 +30,14 @@ t++;
 PistiShuffle shuf = new PistiShuffle(realdeck);
 PistiCut cutter = new PistiCut(realdeck);
 
-realdeck = shuf.Shufunc();    //realdeck shuffled !
+//realdeck = shuf.Shufunc();    //realdeck shuffled !
+//realdeck = cutter.ComputerCuts();  it should assign in game... 
 
 
 
 
-//-------------testing---------------------------
+
+/*-------------testing---------------------------
 
 for(int i=0; i<52; i++){
 
@@ -54,38 +56,7 @@ for(int i=0; i<52; i++){
 
    System.out.println(realdeck[i]);
 }
-//----------------------------------------------- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//-----------------------------------------------*/ 
 
     }
 
@@ -149,5 +120,52 @@ return deck;
 }
 
 
+//--------------VARİABLES, ARRAYS FOR GAME---------------------------------------------
+
+int score = 0; 
+int decksonboard = 0;
+String[] playerdeck = new String[4];  //0 to 3
+String[] comptrdeck = new String[4];  //0 to 3
+String[] board = new String[52];
+String[] playershas = new String[52];
+String[] comptrshas = new String[52];
+
+
+
+
+public static void game(String[] deck) {
+
+Random rd = new Random();
+Scanner scn = new Scanner(System.in);
+
+int k = rd.nextInt(2);
+
+PistiShuffle shuf = new PistiShuffle(deck);
+PistiCut cutter = new PistiCut(deck);
+
+System.out.println("Shuffling...");
+deck = shuf.Shufunc();
+
+System.out.println("Cutting...");
+if(k == 0){
+deck = cutter.PlayerCuts();
+}
+if(k == 1){
+deck = cutter.ComputerCuts();
+}
+
+
+
+
+
+
+
 
 }
+
+
+
+}
+
+
+

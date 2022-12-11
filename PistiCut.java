@@ -61,7 +61,7 @@ return sumbowls;
 
 
 
-public String[] PlayerCuts() { 
+public String[] PlayerCuts() {         //top to the bottom or bottom to the top doesnt matter.
 
 System.out.println("You will cut the deck, enter a value between 0-51 ");
     
