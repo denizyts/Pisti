@@ -14,7 +14,14 @@ realdeck = assign.DeckStr();    //deck assigned in here.
 
 game(realdeck);   //game starts here !!
 
+
+
+
     }
+
+
+
+
 
 
 
@@ -45,41 +52,40 @@ System.out.println("WELCOME TO PISTI !!!");
 PistiShuffle shuf = new PistiShuffle(deck);
 PistiCut cutter = new PistiCut(deck);
 
+int t = 4;   //have a mission in for loop.
+
+
 deck = shuf.Shufunc();                           //firstly shuffling
 deck = cutter.ComputerCuts();                    //secondly cutting of course. 
 
 
+while(quantity < 6){
 
-while(quantity < 24){
+    //Playershand PlayerHand = new Playershand();
 
-for(int i=0; i<4; i++){
-    board[i] = deck[deckdist];     //first 4 card opened.
-    deck[deckdist] = null;         //first 4 card in deck becomes null. 
-deckdist++;
+    for(int i=t ; i<t+4 ; i++){
+      
+
+    }
+
+
+
+
+
+
+
+}
+
+
 }
 
 
 
-quantity = 2004;
-
-
 
 
 }
 
 
-
-
-
-
-
-
-
-    
-
-}
-
-}
 
 
 
