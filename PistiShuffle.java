@@ -17,6 +17,8 @@ public String[] getArr() {return deck;}
 
 
 public String[] Shufunc() { 
+
+    System.out.println("Shuffling process has begun !");
   
     String bowl = "";
     int yet = 0;

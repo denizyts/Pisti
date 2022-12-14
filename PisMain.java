@@ -8,30 +8,18 @@ public class PisMain {
 
 String[] realdeck = new String[52];
 
-
-
-PistiShuffle shuf = new PistiShuffle(realdeck);
-PistiCut cutter = new PistiCut(realdeck);
 PistiDeck assign = new PistiDeck(realdeck);
 
-realdeck = assign.DeckStr();
+realdeck = assign.DeckStr();    //deck assigned in here. 
 
-
-//realdeck = shuf.Shufunc();    //realdeck shuffled !
-//realdeck = cutter.ComputerCuts();  it should assign in game... 
-
-
-
-
-
-//-------------testing---------------------------
-
-for(int i=0; i<52; i++){
-
-   System.out.println(realdeck[i]);
+game(realdeck);   //game starts here !!
 
     }
-    }
+
+
+
+public static void game(String[] deck) {
+
 
 
 
@@ -39,43 +27,59 @@ for(int i=0; i<52; i++){
 
 int score = 0; 
 int decksonboard = 0;
-String[] playerdeck = new String[4];  //0 to 3
-String[] comptrdeck = new String[4];  //0 to 3
+String[] playerdeck = new String[4];    //0 to 3
+String[] comptrdeck = new String[4];    //0 to 3
 String[] board = new String[52];
 String[] playershas = new String[52];
 String[] comptrshas = new String[52];
+int quantity = 0;    //computer and player throw card 24 times on the board !!!!!!!
+int deckdist = 0;   //where we are when distributing ??
 
+//---------------------------------------------------------------------------------------
 
-
-
-public static void game(String[] deck) {
 
 Scanner scn = new Scanner(System.in);
 
+System.out.println("WELCOME TO PISTI !!!");
 
 PistiShuffle shuf = new PistiShuffle(deck);
 PistiCut cutter = new PistiCut(deck);
 
-System.out.println("Shuffling...");
-deck = shuf.Shufunc();
-
-System.out.println("Cutting...");
-deck = cutter.ComputerCuts();
+deck = shuf.Shufunc();                           //firstly shuffling
+deck = cutter.ComputerCuts();                    //secondly cutting of course. 
 
 
 
+while(quantity < 24){
+
+for(int i=0; i<4; i++){
+    board[i] = deck[deckdist];     //first 4 card opened.
+    deck[deckdist] = null;         //first 4 card in deck becomes null. 
+deckdist++;
+}
 
 
 
+quantity = 2004;
 
 
 
-    }
-    
 
 }
 
 
+
+
+
+
+
+
+
+    
+
+}
+
+}
 
 
 
