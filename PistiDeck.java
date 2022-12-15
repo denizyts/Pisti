@@ -1,6 +1,4 @@
 
-
-
 public class PistiDeck {
 
 private String[] deck0; 
@@ -83,7 +81,6 @@ for(int j=0; j<13 ; j++){
 t++;
 }
 }
-
 
 
     return deck0;
