@@ -1,13 +1,15 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
-import java.util.Random;
+
 
 public class PistiMain {
+
+    static int scorehelp = 0;
     public static void main(String[] args) { 
 
     Card[] deck = new Card[52];
-    deck = deckcreate();  
+    deck = deckcreate();                        //new deck...
 
     game(deck);
     
@@ -128,14 +130,13 @@ public static Card[] choise(Card[] deck){        //a func allows you choose your
 
 Scanner scn = new Scanner(System.in);
 
-int chs = 1;                       //chs can be 4 maximum.
+int chs = 1;                       //chs can be 4 maximum. represents players option.
 int indicate = 0;                  //helps throwing card.
 String jack = "J";
 String top = "";
-boolean upisti = false;        //util for pisti
-int score = 0;                //just for pisti, if pisti thing happened score increase 10. 
-int jackhelp = 0;                  //helps for when we used jack, jack should not be on top !!
+boolean upisti = false;        //util for pisti 
 int qcob = 0;                  //quantity of cards on board, helps pisti stuff.
+int jackhelp = 0;                //helps for when we used jack, jack should not be on top !!
 
 System.out.println("Choose a card for throw");
 
@@ -149,7 +150,7 @@ chs++;
 chs--;
 
 try{
-    int rc = scn.nextInt();
+    int rc = scn.nextInt();                                    //getting choise from user.   
 
     if(rc < 1){ 
         System.out.println("ARE YOU KIDDING ME ?");
@@ -174,9 +175,9 @@ try{
     }
     else{
     for(int i=0; i<52; i++){
-        if( deck[i].location == 2){
+        if( deck[i].location == 2){                          
             indicate++;
-         if(rc == indicate){
+         if(rc == indicate){                               //here picks the card players chosed.
 
             for(int j = 0; j<52 ; j++){
                 if(deck[j].location == 2004){          //top represents top cards value.
@@ -194,7 +195,7 @@ try{
            if(deck[i].value().equals(jack)){         //takes all cards !!!
 
             System.out.println("jack takes all :)");
-               jackhelp++;
+            jackhelp++;
                  deck[i].assignLocation(4);
 
             for(int j = 0; j<52 ; j++){
@@ -213,6 +214,8 @@ try{
             if(deck[i].value().equals(top) && qcob == 0){          //pisti thing.
                 System.out.println("PISTI !!!!!!! ");
 
+                deck[i].assignLocation(4);
+
                 for(int j = 0; j<52 ; j++){
 
                     if(deck[j].location() == 1){
@@ -223,7 +226,7 @@ try{
                         deck[j].assignLocation(4);
                     }
             }
-            score += 10;
+            scorehelp += 10;                        //score increased 10... this action required for score calculation ...
             upisti = true;
         }
 
@@ -267,11 +270,15 @@ indicate = 0;
 top = "";
 }
 catch(InputMismatchException e){
-    System.out.println("ENTER A INTEGER !!!!!!");
+    System.out.println("ENTER A INTEGER !!!!!!");             //one of the common exceptions.
     return choise(deck);
 }
 catch(NoSuchElementException e){
-    System.out.println("ENTER A INTEGER !!!!!!");
+    System.out.println("ENTER A INTEGER !!!!!!");              //not necessary i know. one of the common exceptions.
+    return choise(deck);
+}
+catch(Exception e){
+    System.out.println("ENTER A INTEGER !!!!!");               //covers from all exceptions   <3 <3 <3 <3
     return choise(deck);
 }
 finally{
@@ -363,12 +370,36 @@ public static Card[] ComputerTurn(Card[] deck){     //this func contains, comput
     return deck;
 }
 
+public static int ScoreCalculator(Card[] deck){                  //its a score calculator method designed for pisti.
+
+ int score = scorehelp;                     //data taked from scorehelp if pisti thing happened score changes.
+
+ for(int i=0; i<52; i++){
+
+ if(deck[i].location == 4){                         //if card in players earned location ..
+  
+   if(deck[i].value().equals("10") && deck[i].suit().equals(String.valueOf((char)4))){      //diamond 10
+    score = score + 3;
+   }
+   else if(deck[i].value().equals("2") && deck[i].suit().equals(String.valueOf((char)5))){       //club 2
+    score = score + 2;
+   }
+   else { 
+    score++;                                           //without dia10 and club2 each card 1 point.
+   }
+
+ }
+ }
+
+    return score;
+}
+
 public static void game(Card[] deck) {      
 
-      //--------------VARİABLES, ARRAYS FOR GAME---------------------------------------------
+      //--------------VARİABLES FOR GAME---------------------------------------------
  
       int deckindex = 0;   //where we are when distributing ?? , if one card out of the deck during game it cannot return.
-  
+      int score = 0;      //helps when calling top score list methods.
       //---------------------------------------------------------------------------------------
 
 System.out.println("WELCOME TO PISTI !!!");
@@ -387,7 +418,7 @@ for(int i = 0; i<3 ; i++){
  deck[deckindex].assignLocation(2004);                      //one card on top !!
  deckindex++;
 
-for(int j = 0; j<6 ; j++){                                     //cards distrubiting 6 times !!
+for(int j = 0; j<6 ; j++){            //CRITICAL POINT (cards are distrubiting 6 times !!!) THIS LOOP CONTAINS ALL GAME .
 
 for(int i = 0; i<4 ; i++){
     deck[deckindex].assignLocation(2);                     //4 card on players hand.
@@ -426,6 +457,21 @@ for(int i = 0; i<52 ; i++){
     deck[i].assignLocation(4);
  }
 }
+
+System.out.println("GAME FINISHED !!!");
+System.out.println("Your Cards : ");
+
+for(int i = 0; i<52 ; i++){
+    if(deck[i].location == 4){
+        System.out.print(" " + deck[i].value() + deck[i].suit());
+   }
+}
+
+System.out.println("  ");
+System.out.println("Your Score " + ScoreCalculator(deck));
+
+score = ScoreCalculator(deck);                         //ScoreCalc returns integer. 
+
 
 
 }

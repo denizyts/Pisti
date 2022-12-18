@@ -56,7 +56,7 @@ for(int i = 0; i<52; i++){
     bowldeck2[i] = null;
 }
 
-System.out.println("Shuffling process end!");
+System.out.println("Cutting process end!");
 return sumbowls;
 
 }
