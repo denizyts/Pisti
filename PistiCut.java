@@ -66,10 +66,15 @@ public Card[] PlayerCuts() {     //this method doesnt required but it could be n
 
    System.out.println("You will cut the deck, enter a value between 0-51 ");
     
+   PistiCut cutter = new PistiCut(deck);
+
+
+   Card[] bowldeck = new Card[52];
+   Card[] bowldeck2 = new Card[52];
+   Card[] sumbowls = new Card[52];
+
+   try {
     int a = scn.nextInt();                 
-    Card[] bowldeck = new Card[52];
-    Card[] bowldeck2 = new Card[52];
-    Card[] sumbowls = new Card[52];
                 
     System.out.println("Cutting Process has begun !!!");
     
@@ -103,7 +108,16 @@ public Card[] PlayerCuts() {     //this method doesnt required but it could be n
         bowldeck2[i] = null;
     }
     
-    return sumbowls;
+   } 
+   catch(Exception e){
+    System.out.println("IS IT FUNNY ?");
+    return cutter.PlayerCuts();
+   }
+  finally{
+    
+  }
+
+   return sumbowls;
 }
 
 

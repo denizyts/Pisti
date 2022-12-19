@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
@@ -6,12 +7,22 @@ import java.util.NoSuchElementException;
 public class PistiMain {
 
     static int scorehelp = 0;
-    public static void main(String[] args) { 
+    public static void main(String[] args) throws IOException{ 
 
     Card[] deck = new Card[52];
     deck = deckcreate();                        //new deck...
 
-    game(deck);
+   //----------------------------------------------------------
+      Scanner scn = new Scanner(System.in);
+   
+   int a = scn.nextInt();
+
+    TopScoreList ScoreList = new TopScoreList(a);
+
+    ScoreList.ListMaker();
+
+ //--------------------------------------------------------------
+    //game(deck);
     
 }
         
@@ -408,7 +419,7 @@ PistiShuffle shuf = new PistiShuffle(deck);
 PistiCut cutter = new PistiCut(deck);
 
 deck = shuf.Shufunc();                                //firstly shuffling
-deck = cutter.ComputerCuts();                         //secondly cutting of course. 
+deck = cutter.PlayerCuts();                         //secondly cutting of course. 
 
 for(int i = 0; i<3 ; i++){
     deck[deckindex].assignLocation(1);                     //3 card on board now. 
@@ -471,6 +482,8 @@ System.out.println("  ");
 System.out.println("Your Score " + ScoreCalculator(deck));
 
 score = ScoreCalculator(deck);                         //ScoreCalc returns integer. 
+
+
 
 
 
