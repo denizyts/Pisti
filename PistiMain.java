@@ -1,31 +1,22 @@
 import java.util.Scanner;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
-
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.util.Formatter;
 
 public class PistiMain {
 
     static int scorehelp = 0;
     public static void main(String[] args) throws IOException{ 
-
+                             
     Card[] deck = new Card[52];
     deck = deckcreate();                        //new deck...
 
-   //----------------------------------------------------------
-      Scanner scn = new Scanner(System.in);
-   
-   int a = scn.nextInt();
-
-    TopScoreList ScoreList = new TopScoreList(a);
-
-    ScoreList.ListMaker();
-
- //--------------------------------------------------------------
-    //game(deck);
+    game(deck);
     
 }
-        
 
 public static Card[] deckcreate(){      //A function creates a array of card objects...
 
@@ -405,6 +396,125 @@ public static int ScoreCalculator(Card[] deck){                  //its a score c
     return score;
 }
 
+public static void ScoreListRW(int score){                     //ScoreList Reader and Writer
+
+    Scanner scn = new Scanner(System.in);          //scanner for get players name.
+
+    String[][] arr = new String[10][2];         //Example of idea : arr[3][0] = third top scorers name. [3][1] represents his score.
+    String test = "";
+    int th = 1;                               //indicates players rank from end. increasing in while loop.
+    String[] transfer = new String[2];          //just bowl.
+    int scroolhelp = 9;
+
+      Scanner reader = null;
+    try {
+
+        int indicator = 0;
+         reader = new Scanner(Paths.get("TopScoreList.txt" ));
+         while(reader.hasNextLine ()) {
+
+            
+                test = reader.nextLine();                     //reader.nextLine() is single String.
+                transfer = test.split(" ");               //when we split it with space, an array becomes.
+        
+                for(int j = 0; j<2 ; j++){
+                 
+                arr[indicator][j] = transfer[j];                    //now datas coppied to 2dimensional array.
+        
+                }
+                
+                indicator++;
+
+         }
+        } catch (IOException e) {
+         e.printStackTrace ();
+         } finally {
+         if (reader != null) {
+         reader.close();
+         }
+        }
+
+         for(int i = 0; i<10 ; i++){
+            System.out.println(arr[i][0] + " " + arr[i][1]);
+            System.out.println("-----------------------------------");
+         }
+
+        try{
+         if(score > Integer.parseInt(arr[9][1])){            //if score bigger than 10th score this clausement runs.
+
+            System.out.println("WELL DONE , YOU DESERVE TO BE IN TOP SCORE LIST");
+            System.out.println("Would you mind to give me your respective name    :)");
+    
+            String name = scn.nextLine();
+            
+            for(int i=8 ; -1<i ; i--){
+    
+              if(score > Integer.parseInt(arr[i][1])){     
+    
+                  th++;                                        //scores value becomes "th" by end, from begining (11-th)  !!
+    
+            }
+            }
+            
+    
+            th = (11-th);                                //now th represents rank from beggining. 
+    
+        
+     //--------------------changing list values---------------------------------------
+           if(th == 10){                              //player 10th in list
+    
+            arr[scroolhelp][0] = name;
+            arr[scroolhelp][1] = String.valueOf(score);
+    
+    
+           }
+           else if( th >= 1 && th <= 9){
+            for(int i = 9; i > th-1 ; i--){                         //th-1 because values in array are 0-1-2-....-9
+    
+                arr[scroolhelp][0] = arr[scroolhelp-1][0];
+                arr[scroolhelp][1] = arr[scroolhelp-1][1];
+    
+                scroolhelp--;
+            }
+             
+                arr[th-1][0] = name;
+                arr[th-1][1] = String.valueOf(score);                    //arr[][] is now represent values.
+           }
+      
+    
+        //--------------------------WRITING PROCESS------------------------------------------------
+            
+            FileWriter fw = new FileWriter("TopScoreList.txt", true);
+            Formatter f = new Formatter(fw);
+            Formatter delf = new Formatter("TopScoreList.txt");      //no add end of text, rewrites
+
+
+                                                          
+                delf.format("%s", "   ");                //deletes lines.
+               
+
+
+    
+               for(int i = 0; i<10 ; i++){
+                f.format("%s\n", arr[i][0] + " " + arr[i][1] );       //rewrite new list.
+               }
+    
+                 f.close();
+    
+        }
+        else{
+            System.out.println("Good Game :)");              //if player doesnt in top list
+        }
+    }
+    catch(IOException e){
+        System.out.println("Something went wrong");
+    }
+   finally{
+    scn.close();
+   }
+
+}
+
 public static void game(Card[] deck) {      
 
       //--------------VARİABLES FOR GAME---------------------------------------------
@@ -483,8 +593,7 @@ System.out.println("Your Score " + ScoreCalculator(deck));
 
 score = ScoreCalculator(deck);                         //ScoreCalc returns integer. 
 
-
-
+ScoreListRW(score);                                   //ScoreList
 
 
 }
