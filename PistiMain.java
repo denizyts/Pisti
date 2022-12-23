@@ -434,6 +434,9 @@ public static void ScoreListRW(int score){                     //ScoreList Reade
          }
         }
 
+
+         System.out.println("Here is the top score list: ");
+         
          for(int i = 0; i<10 ; i++){
             System.out.println(arr[i][0] + " " + arr[i][1]);
             System.out.println("-----------------------------------");
@@ -501,6 +504,7 @@ public static void ScoreListRW(int score){                     //ScoreList Reade
     
                  f.close();
     
+                 System.out.println("You can find your name in the TopScoreList.txt");
         }
         else{
             System.out.println("Good Game :)");              //if player doesnt in top list
@@ -601,6 +605,7 @@ System.out.println("  ");
 System.out.println("Your Score " + ScoreCalculator(deck));
 
 score = ScoreCalculator(deck);                         //ScoreCalc returns integer. 
+
 
 ScoreListRW(score);                                   //ScoreList
 

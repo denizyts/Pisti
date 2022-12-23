@@ -1,10 +1,10 @@
-deniz 66
-deniz 61
-deniz 58
 deniz 56
 deniz 42
+deniz 35
+deniz 30
+deniz 28
 deniz 25
-osman 20
+deniz 21
 osman 15
-deniz 10
+osman 10
 deniz 5
