@@ -17,7 +17,7 @@ public void setArr(Card[] k){deck = k;}
 public Card[] getArr() { return deck;}
 
 
-public Card[] ComputerCuts() {      //top to the bottom or bottom to the top doesnt matter.
+public Card[] ComputerCuts() {       //this method doesnt required but it could be necessary for advanced versions...
 
 int a = rd.nextInt(52);                 
 Card[] bowldeck = new Card[52];
@@ -62,7 +62,7 @@ return sumbowls;
 }
 
 
-public Card[] PlayerCuts() {     //this method doesnt required but it could be necessary for advanced versions...
+public Card[] PlayerCuts() {     //top to the bottom or bottom to the top doesnt matter. 
 
    System.out.println("You will cut the deck, enter a value between 0-51 ");
     
@@ -75,6 +75,11 @@ public Card[] PlayerCuts() {     //this method doesnt required but it could be n
 
    try {
     int a = scn.nextInt();                 
+
+    if(a<0){                                        //ı dont want to crash program.
+        System.out.println("IS IT FUNNY ??");
+        return cutter.PlayerCuts();
+    }
                 
     System.out.println("Cutting Process has begun !!!");
     
@@ -108,6 +113,8 @@ public Card[] PlayerCuts() {     //this method doesnt required but it could be n
         bowldeck2[i] = null;
     }
     
+    System.out.println("Cutting process end!");
+
    } 
    catch(Exception e){
     System.out.println("IS IT FUNNY ?");

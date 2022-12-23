@@ -140,12 +140,12 @@ boolean upisti = false;        //util for pisti
 int qcob = 0;                  //quantity of cards on board, helps pisti stuff.
 int jackhelp = 0;                //helps for when we used jack, jack should not be on top !!
 
-System.out.println("Choose a card for throw");
+System.out.println("Choose a card for move");
 
 for(int i=0; i<52; i++){
 if( deck[i].location == 2){
 
-    System.out.println("Enter " + chs + " for throw " + deck[i].value() + deck[i].suit());
+    System.out.println("Enter " + chs + " for move " + deck[i].value() + deck[i].suit());
 chs++;
 }
 }
@@ -521,6 +521,7 @@ public static void game(Card[] deck) {
  
       int deckindex = 0;   //where we are when distributing ?? , if one card out of the deck during game it cannot return.
       int score = 0;      //helps when calling top score list methods.
+      int dealerhelper = 0;       //helps dealer when distributing first rounds cards
       //---------------------------------------------------------------------------------------
 
 System.out.println("WELCOME TO PISTI !!!");
@@ -531,25 +532,33 @@ PistiCut cutter = new PistiCut(deck);
 deck = shuf.Shufunc();                                //firstly shuffling
 deck = cutter.PlayerCuts();                         //secondly cutting of course. 
 
+for(int i = 0; i<4 ; i++){
+    deck[deckindex].assignLocation(2);                    //distrubuted for first round one by one.
+    deckindex++;
+    deck[deckindex].assignLocation(3);                     
+    deckindex++;
+}
+
 for(int i = 0; i<3 ; i++){
     deck[deckindex].assignLocation(1);                     //3 card on board now. 
     deckindex++;
-   
 }
  deck[deckindex].assignLocation(2004);                      //one card on top !!
  deckindex++;
 
 for(int j = 0; j<6 ; j++){            //CRITICAL POINT (cards are distrubiting 6 times !!!) THIS LOOP CONTAINS ALL GAME .
 
-for(int i = 0; i<4 ; i++){
-    deck[deckindex].assignLocation(2);                     //4 card on players hand.
-    deckindex++;
-}
 
-for(int i = 0; i<4 ; i++){
-    deck[deckindex].assignLocation(3);                     //4 card on computers hand.
-    deckindex++;
-}
+    if(dealerhelper > 0){
+    for(int i = 0; i<4 ; i++){
+        deck[deckindex].assignLocation(2);                    //distrubuting one by one.
+        deckindex++;
+        deck[deckindex].assignLocation(3);                     
+        deckindex++;
+    }
+    }
+
+    dealerhelper++;
 
 view(deck);
 deck = choise(deck);
